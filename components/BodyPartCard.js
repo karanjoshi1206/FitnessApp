@@ -3,9 +3,16 @@ import React from "react";
 import gym from "../assets/gym.png";
 import body from "../assets/body-part.png";
 
-const BodyPartCard = ({ data, showMuscle }) => {
+const BodyPartCard = ({ navigation, data, showMuscle }) => {
 	return (
-		<TouchableOpacity style={styles.BodyPartCard}>
+		<TouchableOpacity
+			onPress={() =>
+				navigation.navigate("Exercise Details", {
+					data: data,
+					showMuscle: showMuscle,
+				})
+			}
+			style={styles.BodyPartCard}>
 			<Image
 				style={styles.gymImage}
 				resizeMode='cover'

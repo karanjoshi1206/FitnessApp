@@ -3,9 +3,9 @@ import React from "react";
 import { Dimensions } from "react-native";
 import RoundButton from "./RoundButton";
 const screenWidth = Dimensions.get("screen").width;
-const ExerciseCard = ({ data }) => {
+const ExerciseCard = ({ data, navigation }) => {
 	return (
-		<TouchableOpacity style={styles.ExerciseCard}>
+		<View style={styles.ExerciseCard}>
 			<Text style={styles.ExerciseCard_text}>{data.name}</Text>
 			<Image
 				style={styles.ExerciseCard_image}
@@ -23,7 +23,7 @@ const ExerciseCard = ({ data }) => {
 
 				<RoundButton>{data.target}</RoundButton>
 			</View>
-		</TouchableOpacity>
+		</View>
 	);
 };
 

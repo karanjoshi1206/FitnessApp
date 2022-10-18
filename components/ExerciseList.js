@@ -10,21 +10,15 @@ import React, { useEffect, useState } from "react";
 import ExerciseCard from "./ExerciseCard";
 import { listOfExercises } from "../api/listOfExercises";
 
-const ExerciseList = () => {
-	const [exercises, setExercises] = useState([]);
-	const getExercises = async () => {
-		const data = await listOfExercises();
-		setExercises(data);
-	};
-	useEffect(() => {
-		getExercises();
-	}, []);
+const ExerciseList = ({ navigation, data, horizontal = true }) => {
 	return (
 		<>
 			<FlatList
-				horizontal={true}
-				data={exercises}
-				renderItem={({ item }) => <ExerciseCard key={item.id} data={item} />}
+				horizontal={horizontal}
+				data={data}
+				renderItem={({ item }) => (
+					<ExerciseCard navigation={navigation} key={item.id} data={item} />
+				)}
 				keyExtractor={(item) => item.id}
 				snapToAlignment='start'
 				decelerationRate={"fast"}

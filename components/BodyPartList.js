@@ -4,11 +4,12 @@ import BodyPartCard from "./BodyPartCard";
 import { listOfBodyParts } from "../api/listOfBodyParts";
 import { listOfMuscles } from "../api/listOfMuscles";
 
-const BodyPartList = ({ showMuscle = false }) => {
+const BodyPartList = ({ navigation, showMuscle = false }) => {
 	const [bodyParts, setBodyParts] = useState([]);
 	const getBodyParts = async () => {
 		const data = await listOfBodyParts();
-		setBodyParts(data);
+		if (data?.message) setBodyParts([]);
+		else setBodyParts(data);
 	};
 	const getMuscle = async () => {
 		const data = await listOfMuscles();
@@ -24,9 +25,20 @@ const BodyPartList = ({ showMuscle = false }) => {
 				paddingVertical: 10,
 			}}
 			horizontal={true}>
-			{bodyParts.map((elem) => (
-				<BodyPartCard showMuscle={showMuscle} data={elem} key={elem} />
-			))}
+			{bodyParts?.length > 0 ? (
+				<>
+					{bodyParts?.map((elem) => (
+						<BodyPartCard
+							navigation={navigation}
+							showMuscle={showMuscle}
+							data={elem}
+							key={elem}
+						/>
+					))}
+				</>
+			) : (
+				<Text>Oops Something went wrong!!</Text>
+			)}
 		</ScrollView>
 	);
 };
